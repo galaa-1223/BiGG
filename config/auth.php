@@ -81,21 +81,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\BiGG::class,
         ],
-
-        'managers' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Manager::class,
-        ],
-
-        'teachers' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Manager::class,
-        ],
-
-        'students' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Manager::class,
-        ],
     ],
 
     /*
