@@ -12,16 +12,16 @@
     <div class="grid grid-cols-12 gap-6 mt-5">
         <!-- BEGIN: FAQ Menu -->
         <a href="{{ route('bigg-huvaari') }}" class="intro-y col-span-12 lg:col-span-4 box py-10 border-2 border-theme-1 dark:border-theme-1">
-            <i data-feather="user" class="w-14 h-10 text-theme-1 dark:text-theme-10 mx-auto"></i>
-            <div class="font-medium text-center text-base mt-3">Багш</div>
+            <i data-feather="user" class="block w-12 h-12 text-theme-1 dark:text-theme-10 mx-auto"></i> 
+            <div class="text-gray-600 mt-2 w-3/4 text-center mx-auto">Багш</div>
         </a>
         <a href="{{ route('bigg-huvaari-angi') }}" class="intro-y col-span-12 lg:col-span-4 box py-10">
-            <i data-feather="briefcase" class="w-14 h-10 text-theme-1 dark:text-theme-10 mx-auto"></i>
-            <div class="font-medium text-center text-base mt-3">Анги</div>
+            <i data-feather="briefcase" class="block w-12 h-12 text-theme-1 dark:text-theme-10 mx-auto"></i>
+            <div class="text-gray-600 mt-2 w-3/4 text-center mx-auto">Анги</div>
         </a>
         <a href="{{ route('bigg-huvaari-shalgalt') }}" class="intro-y col-span-12 lg:col-span-4 box py-10">
-            <i data-feather="check-circle" class="w-14 h-10 text-theme-1 dark:text-theme-10 mx-auto"></i>
-            <div class="font-medium text-center text-base mt-3">Шалгалт</div>
+            <i data-feather="check-circle" class="block w-12 h-12 text-theme-1 dark:text-theme-10 mx-auto"></i>
+            <div class="text-gray-600 mt-2 w-3/4 text-center mx-auto">Шалгалт</div>
         </a>
         <!-- END: FAQ Menu -->
         <!-- BEGIN: FAQ Content -->
@@ -35,18 +35,18 @@
                 <form class="xl:flex sm:mr-auto" id="tabulator-html-filter-form">
                     <div class="sm:flex items-center sm:mr-4">
                         <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Талбар</label>
-                        <select class="input w-full sm:w-32 xxl:w-full mt-2 sm:mt-0 sm:w-auto border" id="tabulator-html-filter-field">
+                        <select class="form-select w-full sm:w-32 xxl:w-full mt-2 sm:mt-0 sm:w-auto border" id="tabulator-html-filter-field">
                             <option value="teachers.ner">Багшийн нэр</option>
                             <option value="tenhim.ner">Тэнхим</option>
                             <option value="teachers.code">Багшийн код</option>
                         </select>
                     </div>
                     <div class="sm:flex items-center sm:mr-4 mt-2 xl:mt-0">
-                        <input type="text" class="input w-full sm:w-80 xxl:w-full mt-2 sm:mt-0 border" id="tabulator-html-filter-value" placeholder="Хайлт үг...">
+                        <input type="text" class="form-control w-full sm:w-80 xxl:w-full mt-2 sm:mt-0 border" id="tabulator-html-filter-value" placeholder="Хайлт үг...">
                     </div>
                     <div class="mt-2 xl:mt-0">
-                        <button type="button" class="button w-full sm:w-28 bg-theme-1 text-white" id="tabulator-html-filter-go">Хайлт хийх</button>
-                        <button type="button" class="button w-full sm:w-20 mt-2 sm:mt-0 sm:ml-1 bg-gray-200 text-gray-600 dark:bg-dark-5 dark:text-gray-300" id="tabulator-html-filter-reset">Арилгах</button>
+                        <button type="button" class="btn w-full sm:w-28 bg-theme-1 text-white" id="tabulator-html-filter-go">Хайлт хийх</button>
+                        <button type="button" class="btn w-full sm:w-20 mt-2 sm:mt-0 sm:ml-1 bg-gray-200 text-gray-600 dark:bg-dark-5 dark:text-gray-300" id="tabulator-html-filter-reset">Арилгах</button>
                     </div>
                 </form>
             </div>

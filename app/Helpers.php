@@ -45,3 +45,43 @@ if(!function_exists('activeMenu'))
         ];
     }
 }
+
+if(!function_exists('useg')) 
+{
+    function useg($too)
+    {
+        $useg = array(
+            1 => 'а', 
+            2 => 'б', 
+            3 => 'в', 
+            4 => 'г',
+            5 => 'д', 
+            6 => 'е', 
+            7 => 'ё', 
+            8 => 'ж'
+        );
+        
+
+        return $useg[$too];
+    }
+}
+
+if(!function_exists('latin')) 
+{
+    function latin($too)
+    {
+        $useg = array(
+            1 => 'a', 
+            2 => 'b', 
+            3 => 'c', 
+            4 => 'd',
+            5 => 'e', 
+            6 => 'f', 
+            7 => 'g', 
+            8 => 'h'
+        );
+        
+
+        return $useg[$too];
+    }
+}

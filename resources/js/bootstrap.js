@@ -2,11 +2,15 @@
 import cash from "cash-dom";
 import axios from "axios";
 import helper from "./helper";
+import Velocity from "velocity-animate";
+import * as Popper from "@popperjs/core";
 
 // Set plugins globally
 window.cash = cash;
 window.axios = axios;
 window.helper = helper;
+window.Velocity = Velocity;
+window.Popper = Popper;
 
 // CSRF token
 let token = document.head.querySelector('meta[name="csrf-token"]');

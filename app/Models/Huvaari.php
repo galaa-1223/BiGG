@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Huvaari extends Model
 {
     use HasFactory;
-    protected $table = 'angi';
+    protected $table = 'huvaari';
 }

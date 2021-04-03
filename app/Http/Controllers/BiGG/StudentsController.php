@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Image;
-use Illuminate\Support\Facades\Auth;
 
 use App\Models\Angi;
 use App\Models\MergejilBagsh;
@@ -27,8 +26,7 @@ class StudentsController extends Controller
             'first_page_name' => $activeMenu['first_page_name'],
             'page_title' => $pageTitle,
             'page_name' => $pageName,
-            'students' => $students,
-            'user' => Auth::guard('bigg')->user()
+            'students' => $students
         ]);
     }
 
@@ -46,8 +44,7 @@ class StudentsController extends Controller
             'first_page_name' => $activeMenu['first_page_name'],
             'page_title' => $pageTitle,
             'page_name' => $pageName,
-            'angis' => $angi,
-            'user' => Auth::guard('bigg')->user()
+            'angis' => $angi
         ]);
     }
 
@@ -110,8 +107,7 @@ class StudentsController extends Controller
             'first_page_name' => $activeMenu['first_page_name'],
             'page_title' => $pageTitle,
             'page_name' => $pageName,
-            'student' => $student,
-            'user' => Auth::guard('bigg')->user()
+            'student' => $student
         ]);
     }
 

@@ -17,4 +17,5 @@
                     .removeClass("show");
             });
         });
+    
 })(cash);

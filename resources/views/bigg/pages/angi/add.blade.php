@@ -63,21 +63,21 @@
                             <div class="relative mt-2">
                                 <div class="absolute top-0 left-0 rounded-l px-4 h-full flex items-center justify-center bg-gray-100 dark:bg-dark-1 dark:border-dark-4 border text-gray-600">Курс</div>
                                 <div class="pl-6">
-                                    <input type="text" name="course" class="input pl-12 w-full border col-span-4" value="1" minlength="1" maxlength="1" required data-pristine-integer-message="Тоо оруулна уу" data-pristine-minlength-message="1 тэмдэгт байх ёстой" data-pristine-maxlength-message="1 тэмдэгт байх ёстой" data-pristine-required-message="Курс хоосон байж болохгүй">
+                                    <input type="text" name="course" class="form-control pl-12 w-full border col-span-4" value="1" minlength="1" maxlength="1" required data-pristine-integer-message="Тоо оруулна уу" data-pristine-minlength-message="1 тэмдэгт байх ёстой" data-pristine-maxlength-message="1 тэмдэгт байх ёстой" data-pristine-required-message="Курс хоосон байж болохгүй">
                                 </div>
                             </div>
                             <div class="relative mt-2">
                                 <div class="absolute top-0 left-0 rounded-l px-4 h-full flex items-center justify-center bg-gray-100 dark:bg-dark-1 dark:border-dark-4 border text-gray-600">Бүлэг</div>
                                 <div class="pl-8">
-                                    <input type="text" name="buleg" class="input pl-20 w-full border col-span-4" value="А" minlength="1" maxlength="1" required data-pristine-required-message="Бүлэг хоосон байж болохгүй">
+                                    <input type="text" name="buleg" class="form-control pl-20 w-full border col-span-4" value="А" minlength="1" maxlength="1" required data-pristine-required-message="Бүлэг хоосон байж болохгүй">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="flex justify-end mt-4">
-                        <button type="button" onclick="window.location.href='{{ route('bigg-angi') }}'" class="button bg-theme-6 text-white ml-5">{{ __('site.cancel') }}</button> 
-                        <button type="submit" name="action" value="save_and_new" class="button bg-theme-1 text-white ml-5">{{ __('site.save_and_new') }}</button> 
-                        <button type="submit" name="action" value="save" class="button bg-theme-1 text-white ml-5">{{ __('site.save') }}</button>
+                        <button type="button" onclick="window.location.href='{{ route('bigg-angi') }}'" class="btn bg-theme-6 text-white ml-5">{{ __('site.cancel') }}</button> 
+                        <button type="submit" name="action" value="save_and_new" class="btn bg-theme-1 text-white ml-5">{{ __('site.save_and_new') }}</button> 
+                        <button type="submit" name="action" value="save" class="btn bg-theme-1 text-white ml-5">{{ __('site.save') }}</button>
                     </div>
                 </div>
                 <!-- END: Анги нэмэх -->

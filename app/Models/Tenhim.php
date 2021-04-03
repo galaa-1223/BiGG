@@ -14,6 +14,4 @@ class Tenhim extends Model
     protected $table = 'tenhim';
 
     protected $fillable = ['ner', 'tovch'];
-    
-    protected static $logAttributes = ['ner', 'tovch'];
 }

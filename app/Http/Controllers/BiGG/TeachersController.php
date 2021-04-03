@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Image;
-use Illuminate\Support\Facades\Auth;
 
 use App\Models\Teachers;
 use App\Models\Tenhim;
@@ -15,6 +14,7 @@ use App\Models\MergejilBagsh;
 use App\Models\Fond;
 use App\Models\Hicheel;
 use App\Models\Angi;
+use Illuminate\Support\Facades\Auth;
 
 class TeachersController extends Controller
 {
@@ -31,8 +31,7 @@ class TeachersController extends Controller
             'first_page_name' => $activeMenu['first_page_name'],
             'page_title' => $pageTitle,
             'page_name' => $pageName,
-            'teachers' => $teachers,
-            'user' => Auth::guard('bigg')->user()
+            'teachers' => $teachers
         ]);
     }
 
@@ -126,12 +125,12 @@ class TeachersController extends Controller
         $member = Teachers::findOrFail($id);
 
         if ($request->hasFile('image')) {
-
+            $file = $request->file('image');
             $date = Str::slug(Carbon::now());
             $imageName = Str::slug($request->code) . '-' . $date;
             $image = Image::make($request->file('image'))->save(public_path('/uploads/teachers/') . $imageName . '.jpg')->encode('jpg','50');
             $image->fit(300, 300);
-            $image->save(public_path('/uploads/teachers/thumbs/' .$imageName.'.jpg'));
+            $image->save(public_path('/uploads/teachers/thumbs/' .$imageName.'.'.$file->getClientOriginalExtension()));
             $member->image = $imageName.'.jpg';
         }
 
@@ -194,11 +193,12 @@ class TeachersController extends Controller
         $hicheels = Hicheel::orderBy('ner', 'asc')->get();
         $angis = Angi::orderBy('ner', 'asc')->get();
         
-        $fonds = Fond::select('fond.*', 'angi.ner as ner', 'angi.tovch', 'angi.course', 'angi.buleg', 'hicheel.ner as hicheel')
+        $fonds = Fond::select('fond.id as fid', 'fond.t_id', 'fond.tsag as tsag', 'teachers.id', 'angi.ner as angi', 'angi.course as course', 'angi.buleg as buleg', 'angi.tovch', 'hicheel.ner as hicheel', 'hicheel.tovch as hicheel_tovch')
                             ->join('teachers', 'teachers.id', '=', 'fond.t_id')
                             ->join('angi', 'angi.id', '=', 'fond.a_id')
                             ->join('hicheel', 'hicheel.id', '=', 'fond.h_id')
-                            ->findOrFail($id);
+                            ->orderBy('angi', 'asc')
+                            ->where('fond.t_id', $id)->get();
 
         $activeMenu = activeMenu($pageName);
 
@@ -207,9 +207,9 @@ class TeachersController extends Controller
             'page_title' => $pageTitle,
             'page_name' => $pageName,
             'teacher' => $teacher,
-            'fonds' => $fonds,
             'hicheels' => $hicheels,
             'angis' => $angis,
+            'fonds' => $fonds,
             't_id' => $id,
             'user' => Auth::guard('bigg')->user()
         ]);
@@ -240,6 +240,13 @@ class TeachersController extends Controller
                 echo 'preview';
                 break;
         }
+    }
+
+    public function fond_delete(Request $request)
+    {
+        $fond = Fond::findOrFail($request->get("t_id"));
+        $fond->delete();
+        return redirect('bigg/teachers/fond_list/'.$request->get("tid"))->with('success', 'Багшийн цагийн фонд амжилттай устгалаа!'); 
     }
 
     public function destroy(Request $request, $id)

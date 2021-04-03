@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use Spatie\Activitylog\Models\Activity;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Hicheel;
@@ -16,7 +17,7 @@ class HicheelController extends Controller
     {
         $pageTitle = 'Хичээл';
         $pageName = 'hicheel';
-        $hicheel = Hicheel::orderBy('created_at', 'desc')->paginate(9);
+        $hicheel = Hicheel::orderBy('created_at', 'desc')->paginate(10);
 
         $activeMenu = activeMenu($pageName);
 
@@ -24,8 +25,7 @@ class HicheelController extends Controller
             'first_page_name' => $activeMenu['first_page_name'],
             'page_title' => $pageTitle,
             'page_name' => $pageName,
-            'hicheels' => $hicheel,
-            'user' => Auth::guard('bigg')->user()
+            'hicheels' => $hicheel
         ]);
     }
 
@@ -39,8 +39,7 @@ class HicheelController extends Controller
         return view('bigg/pages/'.$pageName.'/add', [
             'first_page_name' => $activeMenu['first_page_name'],
             'page_title' => $pageTitle,
-            'page_name' => $pageName,
-            'user' => Auth::guard('bigg')->user()
+            'page_name' => $pageName
         ]);
     }
 
@@ -50,8 +49,19 @@ class HicheelController extends Controller
         $hicheel = new Hicheel;
 
         $hicheel->ner = Str::ucfirst($request->ner);
-
+        $hicheel->tovch = Str::ucfirst($request->tovch);
+        $user = Auth::guard('bigg')->user();
         $hicheel->save();
+
+        activity('hicheel')
+                ->performedOn($hicheel)
+                ->causedBy($user)
+                ->withProperties([
+                    'new' => [
+                        'ner' => $request->ner,
+                        'tovch' => $request->tovch,
+                    ]
+                ])->log($hicheel->ner.' хичээл нэмэв.');
 
         switch ($request->input('action')) {
             case 'save':
@@ -73,7 +83,7 @@ class HicheelController extends Controller
         $pageTitle = 'Хичээл засварлах';
         $pageName = 'hicheel';
 
-        $teacher = Teachers::findOrFail($id);
+        $hicheel = Hicheel::findOrFail($id);
 
         $activeMenu = activeMenu($pageName);
 
@@ -81,43 +91,42 @@ class HicheelController extends Controller
             'first_page_name' => $activeMenu['first_page_name'],
             'page_title' => $pageTitle,
             'page_name' => $pageName,
-            'teacher' => $teacher,
-            'user' => Auth::guard('bigg')->user()
+            'hicheel' => $hicheel
         ]);
     }
 
     public function update(Request $request, $id)
     {
-        $member = Hicheel::findOrFail($id);
+        $user = Auth::guard('bigg')->user();
 
-        if ($request->hasFile('image')) {
+        $hicheel = Hicheel::findOrFail($id);
 
-            $date = Str::slug(Carbon::now());
-            $imageName = Str::slug($request->code) . '-' . $date;
-            $image = Image::make($request->file('image'))->save(public_path('/uploads/hicheel/') . $imageName . '.jpg')->encode('jpg','50');
-            $image->fit(300, 300);
-            $image->save(public_path('/uploads/hicheel/thumbs/' .$imageName.'.jpg'));
-            $member->image = $imageName.'.jpg';
-        }
+        $ner = $hicheel->ner;
+        $tovch = $hicheel->tovch;
 
-        $member->ner = Str::ucfirst($request->get("ner"));
-        $member->ovog = Str::ucfirst($request->get("ovog"));
-        $member->urag = Str::ucfirst($request->get("urag"));
-        $member->code = $request->get("code");
-        $member->register = $request->get("register");
-        $member->huis = $request->get("huis");
-        $member->tursun = $request->get("tursun");
-        $member->email = $request->get("email");
-        $member->password = $request->get("password");
-        $member->phone = $request->get("phone");
-        $member->address = $request->get("address");
-        $member->updated_at = Carbon::now();
+        $hicheel->ner = Str::ucfirst($request->get("ner"));
+        $hicheel->tovch = Str::ucfirst($request->get("tovch"));
+        $hicheel->updated_at = Carbon::now();
 
-        $member->save();
+        $hicheel->save();
+
+        activity('hicheel')
+                ->performedOn($hicheel)
+                ->causedBy($user)
+                ->withProperties([
+                    'new' => [
+                        'ner' => $request->ner,
+                        'tovch' => $request->tovch,
+                    ],
+                    'old' => [
+                        'ner' => $ner,
+                        'tovch' => $tovch,
+                    ],
+                ])->log($hicheel->ner.' хичээл болгов.');
 
         switch ($request->input('action')) {
             case 'save':
-                return redirect()->route('hicheel')->with('success', 'Хичээл засварлагдлаа нэмэгдлээ!'); 
+                return redirect()->route('bigg-hicheel')->with('success', 'Хичээл засварлагдлаа нэмэгдлээ!'); 
                 break;
     
             case 'save_and_new':
@@ -132,17 +141,32 @@ class HicheelController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        $member = Hicheel::findOrFail($id);
-        $member->delete();
+        $user = Auth::guard('bigg')->user();
+        $hicheel = Hicheel::findOrFail($id);
+        $ner = $hicheel->ner;
+        $hicheel->delete();
 
-        return redirect()->route('hicheel')->with('success', 'Хичээл устгагдлаа нэмэгдлээ!'); 
+        activity('hicheel')
+                ->performedOn($hicheel)
+                ->causedBy($user)
+                ->log($ner.' хичээл устгав.');
+
+        return redirect()->route('hicheel')->with('success', 'Хичээл амжилттай нэмэгдлээ!'); 
 
     }
 
     public function delete(Request $request)
     {
-        $member = Hicheel::findOrFail($request->get("t_id"));
-        $member->delete();
+        $user = Auth::guard('bigg')->user();
+        $hicheel = Hicheel::findOrFail($request->get("t_id"));
+        $ner = $hicheel->ner;
+        $hicheel->delete();
+
+        activity('hicheel')
+                ->performedOn($hicheel)
+                ->causedBy($user)
+                ->log($ner.' хичээл устгав.');
+
         return redirect()->route('bigg-hicheel')->with('success', 'Хичээл амжилттай устгалаа!'); 
     }
 }

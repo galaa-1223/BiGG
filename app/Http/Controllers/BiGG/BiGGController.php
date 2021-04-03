@@ -24,7 +24,6 @@ class BiGGController extends Controller
             'first_page_name' => $activeMenu['first_page_name'],
             'page_title' => $pageTitle,
             'page_name' => $pageName,
-            'user' => Auth::guard('bigg')->user(),
             'angi_count' => Angi::count(),
             'teachers_count' => Teachers::count(),
             'students_count' => Students::count()

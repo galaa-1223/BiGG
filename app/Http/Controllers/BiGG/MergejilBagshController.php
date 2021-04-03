@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Auth;
 
 use App\Models\MergejilBagsh;
 
@@ -24,8 +23,7 @@ class MergejilBagshController extends Controller
             'first_page_name' => $activeMenu['first_page_name'],
             'page_title' => $pageTitle,
             'page_name' => $pageName,
-            'mergejil_bagshs' => $mergejil_bagsh,
-            'user' => Auth::guard('bigg')->user()
+            'mergejil_bagshs' => $mergejil_bagsh
         ]);
     }
 
@@ -39,8 +37,7 @@ class MergejilBagshController extends Controller
         return view('bigg/pages/'.$pageName.'/add', [
             'first_page_name' => $activeMenu['first_page_name'],
             'page_title' => $pageTitle,
-            'page_name' => $pageName,
-            'user' => Auth::guard('bigg')->user()
+            'page_name' => $pageName
         ]);
     }
 
@@ -71,9 +68,9 @@ class MergejilBagshController extends Controller
     public function edit($id)
     {
         $pageTitle = 'Багшийн мэргэжил засварлах';
-        $pageName = 'mergejil-bagsh';
+        $pageName = 'mergejil_bagsh';
 
-        $teacher = MergejilBagsh::findOrFail($id);
+        $mergejilBagsh = MergejilBagsh::findOrFail($id);
 
         $activeMenu = activeMenu($pageName);
 
@@ -81,8 +78,7 @@ class MergejilBagshController extends Controller
             'first_page_name' => $activeMenu['first_page_name'],
             'page_title' => $pageTitle,
             'page_name' => $pageName,
-            'teacher' => $teacher,
-            'user' => Auth::guard('bigg')->user()
+            'mergejilBagsh' => $mergejilBagsh
         ]);
     }
 
@@ -91,10 +87,6 @@ class MergejilBagshController extends Controller
         $mergejil_bagsh = MergejilBagsh::findOrFail($id);
 
         $mergejil_bagsh->ner = Str::ucfirst($request->ner);
-        $mergejil_bagsh->course = $request->course;
-        $mergejil_bagsh->buleg = Str::ucfirst($request->buleg);
-        $mergejil_bagsh->m_id = $request->m_id;
-        $mergejil_bagsh->b_id = $request->b_id;
 
         $mergejil_bagsh->save();
 
@@ -120,5 +112,20 @@ class MergejilBagshController extends Controller
 
         return redirect()->route('mergejil_bagsh')->with('success', 'Багшийн мэргэжил устгагдлаа нэмэгдлээ!'); 
 
+    }
+
+    public function delete(Request $request)
+    {
+        // $user = Auth::guard('bigg')->user();
+        $mergejil_bagsh = MergejilBagsh::findOrFail($request->get("t_id"));
+        // $ner = $hicheel->ner;
+        $mergejil_bagsh->delete();
+
+        // activity('hicheel')
+        //         ->performedOn($hicheel)
+        //         ->causedBy($user)
+        //         ->log($ner.' хичээл устгав.');
+
+        return redirect()->route('bigg-mergejil_bagsh')->with('success', 'Багшийн мэргэжил амжилттай устгалаа!'); 
     }
 }

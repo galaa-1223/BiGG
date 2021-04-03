@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\Models\Activity;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Tenhim;
 
@@ -26,8 +26,7 @@ class TenhimController extends Controller
             'first_page_name' => $activeMenu['first_page_name'],
             'page_title' => $pageTitle,
             'page_name' => $pageName,
-            'tenhims' => $tenhim,
-            'user' => Auth::guard('bigg')->user()
+            'tenhims' => $tenhim
         ]);
     }
 
@@ -86,7 +85,7 @@ class TenhimController extends Controller
         $pageTitle = 'Тэнхим засварлах';
         $pageName = 'tenhim';
 
-        $teacher = tenhim::findOrFail($id);
+        $tenhim = Tenhim::findOrFail($id);
 
         $activeMenu = activeMenu($pageName);
 
@@ -94,9 +93,10 @@ class TenhimController extends Controller
             'first_page_name' => $activeMenu['first_page_name'],
             'page_title' => $pageTitle,
             'page_name' => $pageName,
-            'teacher' => $teacher,
+            'tenhim' => $tenhim,
             'user' => Auth::guard('bigg')->user()
         ]);
+
     }
 
     public function update(Request $request, $id)
@@ -104,10 +104,7 @@ class TenhimController extends Controller
         $tenhim = tenhim::findOrFail($id);
 
         $tenhim->ner = Str::ucfirst($request->ner);
-        $tenhim->course = $request->course;
-        $tenhim->buleg = Str::ucfirst($request->buleg);
-        $tenhim->m_id = $request->m_id;
-        $tenhim->b_id = $request->b_id;
+        $tenhim->tovch = Str::upper($request->tovch);
 
         $tenhim->save();
 

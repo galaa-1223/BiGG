@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\TeachersController;
 use App\Http\Controllers\Api\StudentsController;
 use App\Http\Controllers\Api\HuvaariController;
 use App\Http\Controllers\Api\StatisticController;
+use App\Http\Controllers\Api\EventController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,8 +32,10 @@ Route::group(['prefix' => '/v1'], function()
     // Route::get('teachers/{query}', [TeachersController::class, 'teacherQuery']);
     Route::post("teacher-login", [TeachersController::class, 'teacherLogin']);
 
+    Route::get('events', [EventController::class, 'eventList']);
+
     Route::get('huvaari/teachers', [HuvaariController::class, 'teacherList']);
     Route::get('huvaari/angiud', [HuvaariController::class, 'angiList']);
 
-    Route::get('statistics', [StatisticController::class, 'index']);
+    // Route::get('statistics', [StatisticController::class, 'index']);
 });

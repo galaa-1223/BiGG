@@ -98,11 +98,12 @@ class HuvaariController extends Controller
             // }
 
         }else{
-            $teacher = Teachers::select('teachers.id', 'teachers.ner', 'teachers.ovog', 'teachers.image','teachers.code', 'teacher_mergejil.ner as mergejil', 'tenhim.ner as tenhim', 'tenhim.tovch')
-                            ->join('teacher_mergejil', 'teacher_mergejil.id', '=', 'teachers.mb_id')
-                            ->join('tenhim', 'tenhim.id', '=', 'teachers.t_id')
-                            ->orderBy($request->sorters[0]['field'], $request->sorters[0]['dir'])
-                            ->get();
+            // $teacher = Teachers::select('teachers.id', 'teachers.ner', 'teachers.ovog', 'teachers.image','teachers.code', 'teacher_mergejil.ner as mergejil', 'tenhim.ner as tenhim', 'tenhim.tovch')
+            //                 ->join('teacher_mergejil', 'teacher_mergejil.id', '=', 'teachers.mb_id')
+            //                 ->join('tenhim', 'tenhim.id', '=', 'teachers.t_id')
+            //                 ->orderBy($request->sorters[0]['field'], $request->sorters[0]['dir'])
+            //                 ->get();
+            $teacher = Teacher::All();
         }
 
         $json = array(

@@ -26,7 +26,7 @@
                                     </div>
                                 </div>
                                 <div class="w-40 mx-auto cursor-pointer relative mt-5">
-                                    <button type="button" class="button w-full bg-theme-1 text-white cursor-pointer">Зураг оруулах</button>
+                                    <button type="button" class="btn w-full bg-theme-1 text-white cursor-pointer">Зураг оруулах</button>
                                     <input type="file" name="image" id="image" accept="image/png, image/jpeg" class="w-full h-full top-0 left-0 absolute opacity-0">
                                 </div>
                             </div>
@@ -36,25 +36,25 @@
                                 <label class="flex flex-col sm:flex-row">
                                     Багшийн нэр: <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">Криллээр бичнэ</span>
                                 </label>
-                                <input type="text" name="ner" class="input w-full border mt-2" minlength="2" required data-pristine-minlength-message="2 тэмдэгдээс дээш байх ёстой" data-pristine-required-message="Багшийн нэр хоосон байж болохгүй"/>
+                                <input type="text" name="ner" class="form-control w-full border mt-2" minlength="2" required data-pristine-minlength-message="2 тэмдэгдээс дээш байх ёстой" data-pristine-required-message="Багшийн нэр хоосон байж болохгүй"/>
                             </div>
                             <div class="input-form mt-3">
                                 <label class="flex flex-col sm:flex-row">
                                 Эцгийн нэр: <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">Криллээр бичнэ</span>
                                 </label>
-                                <input type="text" name="ovog" class="input w-full border mt-2" minlength="2" required data-pristine-minlength-message="2 тэмдэгдээс дээш байх ёстой" data-pristine-required-message="Эцгийн нэр хоосон байж болохгүй"/>
+                                <input type="text" name="ovog" class="form-control w-full border mt-2" minlength="2" required data-pristine-minlength-message="2 тэмдэгдээс дээш байх ёстой" data-pristine-required-message="Эцгийн нэр хоосон байж болохгүй"/>
                             </div>
                             <div class="input-form mt-3">
                                 <label class="flex flex-col sm:flex-row">
                                 Ургийн овог: <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">Криллээр бичнэ</span>
                                 </label>
-                                <input type="text" name="urag" class="input w-full border mt-2" minlength="2" required data-pristine-minlength-message="2 тэмдэгдээс дээш байх ёстой" data-pristine-minlength-message="2 тэмдэгдээс дээш байх ёстой" data-pristine-required-message="Ургийн овог хоосон байж болохгүй"/>
+                                <input type="text" name="urag" class="form-control w-full border mt-2" minlength="2" required data-pristine-minlength-message="2 тэмдэгдээс дээш байх ёстой" data-pristine-minlength-message="2 тэмдэгдээс дээш байх ёстой" data-pristine-required-message="Ургийн овог хоосон байж болохгүй"/>
                             </div>
                             <div class="input-form mt-3">
                                 <label class="flex flex-col sm:flex-row">
                                 Багшийн код: <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">Тоо оруулна</span>
                                 </label>
-                                <input type="integer" name="code" class="input w-full border mt-2" minlength="8" maxlength="8" required data-pristine-integer-message="Тоо оруулна уу" data-pristine-minlength-message="8 тэмдэгт байх ёстой" data-pristine-maxlength-message="8 тэмдэгт байх ёстой" data-pristine-required-message="Багшийн код хоосон байж болохгүй"/>
+                                <input type="integer" name="code" class="form-control w-full border mt-2" minlength="8" maxlength="8" required data-pristine-integer-message="Тоо оруулна уу" data-pristine-minlength-message="8 тэмдэгт байх ёстой" data-pristine-maxlength-message="8 тэмдэгт байх ёстой" data-pristine-required-message="Багшийн код хоосон байж болохгүй"/>
                             </div>
                             <div class="input-form mt-3">
                                 <label class="flex flex-col sm:flex-row">
@@ -105,13 +105,13 @@
                                 <label class="flex flex-col sm:flex-row">
                                 Регистрийн дугаар: <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">Жишээ: ЧЛ85032971</span>
                                 </label>
-                                <input type="text" name="register" class="input w-full border mt-2" placeholder="ҮҮ000000" required data-pristine-required-message="Регистрийн дугаар хоосон байж болохгүй"/>
+                                <input type="text" name="register" class="form-control w-full border mt-2" placeholder="ҮҮ000000" required data-pristine-required-message="Регистрийн дугаар хоосон байж болохгүй"/>
                             </div>
                             <div class="input-form mt-3">
                                 <label class="flex flex-col sm:flex-row">
                                 Хүйс:
                                 </label>
-                                <select name="huis" id="huis" class="input w-full border mt-2">
+                                <select name="huis" id="huis" class="form-select sm:mr-2 w-full border mt-2">
                                     <option value="er">Эрэгтэй</option>
                                     <option value="em">Эмэгтэй</option>
                                 </select>
@@ -122,7 +122,7 @@
                                 <label class="flex flex-col sm:flex-row">
                                 Төрсөн огноо: <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">Жишээ: 2000-12-31</span>
                                 </label>
-                                <input type="text" name="tursun" class="input w-full border mt-2" placeholder="YYYY-MM-DD" required  data-pristine-required-message="Төрсөн огноо хоосон байж болохгүй"/>
+                                <input type="text" name="tursun" class="form-control w-full border mt-2" placeholder="YYYY-MM-DD" required  data-pristine-required-message="Төрсөн огноо хоосон байж болохгүй"/>
                             </div>
                             
                         </div>
@@ -131,7 +131,7 @@
                                 <label class="flex flex-col sm:flex-row">
                                 Гэрийн хаяг: <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">Криллээр бичнэ</span>
                                 </label>
-                                <textarea name="address" id="address" class="input w-full border mt-2"></textarea>
+                                <textarea name="address" id="address" class="form-control w-full border mt-2"></textarea>
                             </div>
                         </div>
                     </div>
@@ -150,14 +150,14 @@
                                 <label class="flex flex-col sm:flex-row">
                                 Имэйл хаяг: <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">Жишээ: bayaraa@gmail.com</span>
                                 </label>
-                                <input type="email" name="email" id="email" class="input w-full border bg-gray-100 mt-2" minlength="6" required data-pristine-email-message="Имэйл хаяг бичнэ үү" data-pristine-minlength-message="6 тэмдэгдээс дээш байх ёстой" data-pristine-required-message="Имэйл хоосон байж болохгүй"/>
+                                <input type="email" name="email" id="email" class="form-control w-full border bg-gray-100 mt-2" minlength="6" required data-pristine-email-message="Имэйл хаяг бичнэ үү" data-pristine-minlength-message="6 тэмдэгдээс дээш байх ёстой" data-pristine-required-message="Имэйл хоосон байж болохгүй"/>
                             </div>
                             
                             <div class="input-form mt-3">
                                 <label class="flex flex-col sm:flex-row">
                                 Нууц үг: <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">Нууц үгийг солиж болно</span>
                                 </label>
-                                <input type="text" name="password" id="password" class="input w-full border mt-2" minlength="4" value="{{ rand(1000,9999) }}" required data-pristine-minlength-message="4 тэмдэгдээс дээш байх ёстой" data-pristine-required-message="Нууц үг хоосон байж болохгүй"/>
+                                <input type="text" name="password" id="password" class="form-control w-full border mt-2" minlength="4" value="{{ rand(1000,9999) }}" required data-pristine-minlength-message="4 тэмдэгдээс дээш байх ёстой" data-pristine-required-message="Нууц үг хоосон байж болохгүй"/>
                             </div>
                         </div>
                         <div class="col-span-12 xl:col-span-6">
@@ -165,14 +165,14 @@
                                 <label class="flex flex-col sm:flex-row">
                                 Утасны дугаар: <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">Жишээ: 99117788</span>
                                 </label>
-                                <input type="text" name="phone" id="phone" class="input w-full border mt-2" minlength="8" required data-pristine-minlength-message="8 тэмдэгдээс дээш байх ёстой" data-pristine-required-message="Утасны дугаар хоосон байж болохгүй"/>
+                                <input type="text" name="phone" id="phone" class="form-control w-full border mt-2" minlength="8" required data-pristine-minlength-message="8 тэмдэгдээс дээш байх ёстой" data-pristine-required-message="Утасны дугаар хоосон байж болохгүй"/>
                             </div>
                         </div>
                     </div>
                     <div class="flex justify-end mt-4">
-                        <button type="button" onclick="window.location.href='{{ route('bigg-teachers') }}'" class="button w-40 bg-theme-6 text-white ml-5">{{ __('site.cancel') }}</button> 
-                        <button type="submit" name="action" value="save_and_new" class="button w-40 bg-theme-1 text-white ml-5">{{ __('site.save_and_new') }}</button> 
-                        <button type="submit" name="action" value="save" class="button w-40 bg-theme-1 text-white ml-5">{{ __('site.save') }}</button>
+                        <button type="button" onclick="window.location.href='{{ route('bigg-teachers') }}'" class="btn w-40 bg-theme-6 text-white ml-5">{{ __('site.cancel') }}</button> 
+                        <button type="submit" name="action" value="save_and_new" class="btn w-40 bg-theme-1 text-white ml-5">{{ __('site.save_and_new') }}</button> 
+                        <button type="submit" name="action" value="save" class="btn w-40 bg-theme-1 text-white ml-5">{{ __('site.save') }}</button>
                     </div>
                 </div>
             </div>

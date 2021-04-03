@@ -20,7 +20,11 @@ import jsBeautify from "js-beautify";
         cash(this).append(originalSource);
 
         // Beautify code
-        replace = jsBeautify.html(replace);
+        if (cash(this).find("code").hasClass("javascript")) {
+            replace = jsBeautify(replace);
+        } else {
+            replace = jsBeautify.html(replace);
+        }
 
         // Format for highlight.js
         replace = helper.replaceAll(replace, "<", "&lt;");

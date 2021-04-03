@@ -105,27 +105,25 @@ return [
             'icon' => 'briefcase',
             'page_name' => 'angi',
             'title' => 'Анги',
-            'link' => null,
-            'sub_menu' => [
-                'angi' => [
-                    'icon' => 'plus',
-                    'page_name' => 'angi-add',
-                    'title' => 'Анги нэмэх',
-                    'link' => '/bigg/angi/add'
-                ],
-                'angi-lists' => [
-                    'icon' => 'list',
-                    'page_name' => 'angi-lists',
-                    'title' => 'Анги жагсаалт',
-                    'link' => '/bigg/angi'
-                ]
-            ]
+            'link' => '/bigg/angi'
         ],
         'huvaari' => [
             'icon' => 'calendar',
             'page_name' => 'huvaari',
             'title' => 'Хичээлийн хуваарь',
             'link' => '/bigg/huvaari'
+        ],
+        'events' => [
+            'icon' => 'message-square',
+            'page_name' => 'events',
+            'title' => 'Үйл явдал',
+            'link' => '/bigg/events'
+        ],
+        'news' => [
+            'icon' => 'rss',
+            'page_name' => 'news',
+            'title' => 'Зар, мэдээ мэдээлэл',
+            'link' => '/bigg/news'
         ],
         'study' => [
             'icon' => 'book-open',
@@ -169,7 +167,7 @@ return [
                     'icon' => 'edit',
                     'page_name' => 'eshalgalt',
                     'title' => 'Шалгалт',
-                    'link' => '/bigg/students'
+                    'link' => '/bigg/shalgalt'
                 ]
             ]
         ],

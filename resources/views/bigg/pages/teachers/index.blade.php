@@ -9,18 +9,14 @@
     <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">Багшийн талбар</h2>
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-            <button class="button text-white bg-theme-1 shadow-md mr-2">Багш нэмэх</button>
-            <div class="dropdown ml-auto sm:ml-0">
-                <button class="dropdown-toggle button px-2 box text-gray-700 dark:text-gray-300">
-                    <span class="w-5 h-5 flex items-center justify-center">
-                        <i class="w-4 h-4" data-feather="plus"></i>
-                    </span>
+            <a href="{{ route('bigg-teachers-add') }}" class="btn bg-theme-1 text-white shadow-md mr-2">Багш нэмэх</a> 
+            <div class="pos-dropdown dropdown ml-auto sm:ml-0">
+                <button class="dropdown-toggle btn px-2 box text-gray-700 dark:text-gray-300" aria-expanded="false">
+                    <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="chevron-down"></i> </span>
                 </button>
-                <div class="dropdown-box w-40">
-                    <div class="dropdown-box__content box dark:bg-dark-1 p-2">
-                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
-                            <i data-feather="file-plus" class="w-4 h-4 mr-2"></i> Тэнхим нэмэх
-                        </a>
+                <div class="pos-dropdown__dropdown-menu dropdown-menu">
+                    <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                        <a href="{{ route('bigg-tenhim-add') }}" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="activity" class="w-4 h-4 mr-2"></i> <span class="truncate">Тэнхим нэмэх</span> </a>
                     </div>
                 </div>
             </div>
@@ -37,45 +33,47 @@
             <form class="xl:flex sm:mr-auto" id="tabulator-html-filter-form">
                 <div class="sm:flex items-center sm:mr-4">
                     <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Талбар</label>
-                    <select class="input w-full sm:w-32 xxl:w-full mt-2 sm:mt-0 sm:w-auto border" id="tabulator-html-filter-field">
+                    <select class="form-control w-full sm:w-32 xxl:w-full mt-2 sm:mt-0 sm:w-auto border" id="tabulator-html-filter-field">
                         <option value="teachers.ner">Багшийн нэр</option>
                         <option value="tenhim.ner">Тэнхим</option>
                         <option value="teachers.code">Багшийн код</option>
                     </select>
                 </div>
                 <div class="sm:flex items-center sm:mr-4 mt-2 xl:mt-0">
-                    <input type="text" class="input w-full sm:w-50 xxl:w-full mt-2 sm:mt-0 border" id="tabulator-html-filter-value" placeholder="Хайлт үг...">
+                    <input type="text" class="form-control w-full sm:w-50 xxl:w-full mt-2 sm:mt-0 border" id="tabulator-html-filter-value" placeholder="Хайлт үг...">
                 </div>
                 <div class="mt-2 xl:mt-0">
-                    <button type="button" class="button w-full sm:w-28 bg-theme-1 text-white" id="tabulator-html-filter-go">Хайлт хийх</button>
-                    <button type="button" class="button w-full sm:w-20 mt-2 sm:mt-0 sm:ml-1 bg-gray-200 text-gray-600 dark:bg-dark-5 dark:text-gray-300" id="tabulator-html-filter-reset">Арилгах</button>
+                    <button type="button" class="btn w-full sm:w-28 bg-theme-1 text-white" id="tabulator-html-filter-go">Хайлт хийх</button>
+                    <button type="button" class="btn w-full sm:w-20 mt-2 sm:mt-0 sm:ml-1 bg-gray-200 text-gray-600 dark:bg-dark-5 dark:text-gray-300" id="tabulator-html-filter-reset">Арилгах</button>
                 </div>
             </form>
             <div class="flex mt-5 sm:mt-0">
-                <button class="button w-1/2 sm:w-auto flex items-center border text-gray-700 mr-2 dark:bg-dark-5 dark:text-gray-300" id="tabulator-print">
-                    <i data-feather="printer" class="w-4 h-4 mr-2"></i> Хэвлэх
+                <button class="btn w-1/2 sm:w-auto flex items-center border text-gray-700 mr-2 dark:bg-dark-5 dark:text-gray-300" id="tabulator-print">
+                    <i data-feather="printer" class="w-4 h-4 mr-2"></i> Хөрвүүлэх
                 </button>
-                <div class="dropdown w-1/2 sm:w-auto">
-                    <button class="dropdown-toggle button w-full sm:w-auto flex items-center border text-gray-700 dark:bg-dark-5 dark:text-gray-300">
-                        <i data-feather="file-text" class="w-4 h-4 mr-2"></i> Хөрвүүлэх <i data-feather="chevron-down" class="w-4 h-4 ml-auto sm:ml-2"></i>
+                <div class="pos-dropdown dropdown ml-auto sm:ml-0">
+                    <button class="dropdown-toggle btn px-2 box text-gray-700 dark:text-gray-300" aria-expanded="false">
+                        <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="chevron-down"></i> </span>
                     </button>
-                    <div class="dropdown-box w-40">
-                        <div class="dropdown-box__content box dark:bg-dark-1 p-2">
-                            <a href="javascript:;" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md" id="tabulator-export-csv">
-                                <i data-feather="file-text" class="w-4 h-4 mr-2"></i> CSV Файл
+                    <div class="pos-dropdown__dropdown-menu dropdown-menu">
+                        <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                            <a href="javascript:;" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> 
+                                <i data-feather="activity" class="w-4 h-4 mr-2"></i> <span class="truncate">CSV Файл</span> 
                             </a>
-                            <a href="javascript:;" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md" id="tabulator-export-json">
-                                <i data-feather="file-text" class="w-4 h-4 mr-2"></i> JSON Файл
+                            <a href="javascript:;" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> 
+                                <i data-feather="activity" class="w-4 h-4 mr-2"></i> <span class="truncate">JSON Файл</span> 
                             </a>
-                            <a href="javascript:;" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md" id="tabulator-export-xlsx">
-                                <i data-feather="file-text" class="w-4 h-4 mr-2"></i> XLSX Файл
+                            <a href="javascript:;" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> 
+                                <i data-feather="activity" class="w-4 h-4 mr-2"></i> <span class="truncate">XLSX Файл</span> 
                             </a>
-                            <a href="javascript:;" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md" id="tabulator-export-html">
-                                <i data-feather="file-text" class="w-4 h-4 mr-2"></i> HTML Файл
+                            <a href="javascript:;" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> 
+                                <i data-feather="activity" class="w-4 h-4 mr-2"></i> <span class="truncate">HTML Файл</span> 
                             </a>
                         </div>
                     </div>
                 </div>
+
+                
             </div>
         </div>
         <div class="overflow-x-auto scrollbar-hidden">

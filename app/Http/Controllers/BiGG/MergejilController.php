@@ -18,7 +18,8 @@ class MergejilController extends Controller
         $pageTitle = 'Мэргэжил';
         $pageName = 'mergejil';
 
-        $mergejil = Mergejil::orderBy('ner', 'asc')->get();
+        $mergejil = Mergejil::orderBy('ner', 'asc')->paginate(9);
+        $bolovsrol = MergejilTurul::orderBy('ner', 'asc')->get();
 
         $activeMenu = activeMenu($pageName);
 
@@ -27,7 +28,7 @@ class MergejilController extends Controller
             'page_title' => $pageTitle,
             'page_name' => $pageName,
             'mergejils' => $mergejil,
-            'user' => Auth::guard('bigg')->user()
+            'bolovsrols' => $bolovsrol
         ]);
     }
 
@@ -44,8 +45,7 @@ class MergejilController extends Controller
             'first_page_name' => $activeMenu['first_page_name'],
             'page_title' => $pageTitle,
             'page_name' => $pageName,
-            'bolovsrols' => $bolovsrol,
-            'user' => Auth::guard('bigg')->user()
+            'bolovsrols' => $bolovsrol
         ]);
     }
 
@@ -80,7 +80,8 @@ class MergejilController extends Controller
         $pageTitle = 'Мэргэжил засварлах';
         $pageName = 'mergejil';
 
-        $teacher = mergejil::findOrFail($id);
+        $mergejil = mergejil::findOrFail($id);
+        $bolovsrol = MergejilTurul::orderBy('ner', 'asc')->get();
 
         $activeMenu = activeMenu($pageName);
 
@@ -88,8 +89,8 @@ class MergejilController extends Controller
             'first_page_name' => $activeMenu['first_page_name'],
             'page_title' => $pageTitle,
             'page_name' => $pageName,
-            'teacher' => $teacher,
-            'user' => Auth::guard('bigg')->user()
+            'mergejil' => $mergejil,
+            'bolovsrols' => $bolovsrol
         ]);
     }
 
@@ -98,10 +99,8 @@ class MergejilController extends Controller
         $mergejil = mergejil::findOrFail($id);
 
         $mergejil->ner = Str::ucfirst($request->ner);
-        $mergejil->course = $request->course;
-        $mergejil->buleg = Str::ucfirst($request->buleg);
-        $mergejil->m_id = $request->m_id;
-        $mergejil->b_id = $request->b_id;
+        $mergejil->bolovsrol = $request->bolovsrol;
+        $mergejil->jil = $request->jil;
 
         $mergejil->save();
 

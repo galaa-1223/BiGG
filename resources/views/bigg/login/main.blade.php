@@ -1,7 +1,7 @@
 @extends('../bigg/layout/' . $layout)
 
 @section('head')
-    <title>Нэвтрэх :: BiGG systems</title>
+    <title>Нэвтрэх :: {{ config('settings.site_name') }}</title>
 @endsection
 
 @section('content')
@@ -10,13 +10,13 @@
             <!-- BEGIN: Login Info -->
             <div class="hidden xl:flex flex-col min-h-screen">
                 <a href="" class="-intro-x flex items-center pt-5">
-                    <img alt="BiGG systems" class="w-6" src="{{ asset('dist/images/logo.svg') }}">
+                    <img alt="{{ config('settings.site_name') }}" class="w-6" src="{{ asset('dist/images/logo.svg') }}">
                     <span class="text-white text-lg ml-3">
                         <span class="font-medium">BiGG</span> systems
                     </span>
                 </a>
                 <div class="my-auto">
-                    <img alt="BiGG systems" class="-intro-x w-1/2 -mt-16" src="{{ asset('dist/images/vector.svg') }}">
+                    <img alt="{{ config('settings.site_name') }}" class="-intro-x w-1/2 -mt-16" src="{{ asset('dist/images/vector.svg') }}">
                     <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">{ Админ талбар }</div>
                     <div class="-intro-x mt-5 text-lg text-white dark:text-gray-500">Томоохон амжилт нь урьдчилан төлөвлөж бодсон олон жижиг зүйлээс бүрддэг.</div>
                 </div>
@@ -30,21 +30,21 @@
                     <div class="intro-x mt-2 text-gray-500 xl:hidden text-center">Томоохон амжилт нь урьдчилан төлөвлөж бодсон олон жижиг зүйлээс бүрддэг.</div>
                     <div class="intro-x mt-8">
                         <form id="login-form">
-                            <input type="text" name="email" id="input-email" class="intro-x login__input input input--lg border border-gray-300 block" placeholder="{{ __('site.email') }}" />
+                            <input type="text" name="email" id="input-email" class="intro-x login__input form-control py-3 px-4 border border-gray-300 block" placeholder="{{ __('site.email') }}" />
                             <div id="error-email" class="login__input-error w-5/6 text-theme-6 mt-2"></div>
-                            <input type="password" name="password" id="input-password" class="intro-x login__input input input--lg border border-gray-300 block mt-4" placeholder="{{ __('site.password') }}" />
+                            <input type="password" name="password" id="input-password" class="intro-x login__input form-control py-3 px-4 border border-gray-300 block mt-4" placeholder="{{ __('site.password') }}" />
                             <div id="error-password" class="login__input-error w-5/6 text-theme-6 mt-2"></div>
                         </form>
                     </div>
                     <div class="intro-x flex text-gray-700 dark:text-gray-600 text-xs sm:text-sm mt-4">
                         <div class="flex items-center mr-auto">
-                            <input type="checkbox" class="input border mr-2" id="input-remember-me">
+                            <input type="checkbox" class="form-check-input border mr-2" id="input-remember-me">
                             <label class="cursor-pointer select-none" for="input-remember-me">{{ __('site.remember_me') }}</label>
                         </div>
                         <a href="">{{ __('site.forget_password') }}?</a>
                     </div>
                     <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
-                        <button id="btn-login" class="button button--lg w-full xl:w-32 text-white bg-theme-1 xl:mr-3 align-top">{{ __('site.login') }}</button>
+                        <button id="btn-login" class="btn w-full py-3 px-4 xl:w-32 text-white bg-theme-1 xl:mr-3 align-top">{{ __('site.login') }}</button>
                     </div>
                 </div>
             </div>

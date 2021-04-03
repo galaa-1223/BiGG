@@ -50,13 +50,14 @@ import Toastify from "toastify-js";
                 e.preventDefault();
 
                 Toastify({
-                    text: "Формыг бүрэн бөглөнө үү!",
+                    node: cash("#failed-notification-content")
+                        .clone()
+                        .removeClass("hidden")[0],
                     duration: 3000,
                     newWindow: true,
                     close: true,
                     gravity: "bottom",
                     position: "right",
-                    backgroundColor: "#D32929",
                     stopOnFocus: true,
                 }).showToast();
             }

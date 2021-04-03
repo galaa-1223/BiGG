@@ -21,10 +21,25 @@ class AngiController extends Controller
         $pageTitle = 'Ангиуд';
         $pageName = 'angi';
 
-        $angi = Angi::select('angi.*', 'teachers.ner as bagsh', 'teachers.ovog')
-                            ->join('teachers', 'teachers.id', '=', 'angi.b_id')
+//         $search = $request['search'];
+// $members = DB::table('users')
+//           ->select('users.id','users.name','users.lname','users.email','users.phone','users.address_1','users.address_2','users.city','users.postcode','users.unit','users.photo','users.created_at','countries.name as country')
+//           ->join('countries','users.country','=','countries.id')
+//           ->where(function($query) {
+//             $query->where('users.name', 'like' , '%'. $search .'%')
+//               ->orWhere('users.lname', 'like' , '%'. $search .'%')
+//               ->orWhere('users.email', 'like' , '%'. $search .'%');
+//             })
+//           ->where('users.is_active', '!=', 2)
+//           ->get();
+
+        $angi = Angi::select('angi.*')
                             ->orderBy('ner', 'asc')
-                            ->get();
+                            ->paginate(10);
+        $teachers = Teachers::orderBy('ner', 'desc')->get();
+
+        $mergejil = Mergejil::orderBy('ner', 'asc')->get();
+        $bolovsrol = MergejilTurul::orderBy('ner', 'asc')->get();
 
         $activeMenu = activeMenu($pageName);
 
@@ -32,8 +47,10 @@ class AngiController extends Controller
             'first_page_name' => $activeMenu['first_page_name'],
             'page_title' => $pageTitle,
             'page_name' => $pageName,
-            'angiud' => $angi,
-            'user' => Auth::guard('bigg')->user()
+            'mergejils' => $mergejil,
+            'bolovsrols' => $bolovsrol,
+            'teachers' => $teachers,
+            'angiud' => $angi
         ]);
     }
 
@@ -54,7 +71,6 @@ class AngiController extends Controller
             'first_page_name' => $activeMenu['first_page_name'],
             'page_title' => $pageTitle,
             'page_name' => $pageName,
-            'user' => Auth::guard('bigg')->user(),
             'mergejils' => $mergejil,
             'bolovsrols' => $bolovsrol,
             'teachers' => $teachers
@@ -63,6 +79,7 @@ class AngiController extends Controller
 
     public function store(Request $request)
     {
+        dd($request);
 
         $angi = new Angi;
 
@@ -71,14 +88,14 @@ class AngiController extends Controller
         $tovch = '';
         $ners = explode(" ", $mergejil->ner);
         foreach($ners as $t):
-            $tovch .= Str::ucfirst(Str::substr($t, 0, 1));
+            $tovch .= Str::lower(Str::substr($t, 0, 1));
         endforeach;
 
-        $angi->tovch = $tovch.' '.$request->course.Str::ucfirst($request->buleg);
+        $angi->tovch = $tovch.' '.$request->course.Str::lower($request->buleg);
 
         $angi->ner = Str::ucfirst($mergejil->ner);
         $angi->course = $request->course;
-        $angi->buleg = Str::ucfirst($request->buleg);
+        $angi->buleg = Str::lower($request->buleg);
         $angi->m_id = $request->m_id;
         $angi->b_id = $request->b_id;
 
@@ -104,7 +121,11 @@ class AngiController extends Controller
         $pageTitle = 'Анги засварлах';
         $pageName = 'angi';
 
-        $teacher = Angi::findOrFail($id);
+        $angi = Angi::findOrFail($id);
+        $teachers = Teachers::orderBy('ner', 'desc')->get();
+
+        $mergejil = Mergejil::orderBy('ner', 'asc')->get();
+        $bolovsrol = MergejilTurul::orderBy('ner', 'asc')->get();
 
         $activeMenu = activeMenu($pageName);
 
@@ -112,9 +133,13 @@ class AngiController extends Controller
             'first_page_name' => $activeMenu['first_page_name'],
             'page_title' => $pageTitle,
             'page_name' => $pageName,
-            'teacher' => $teacher,
+            'angi' => $angi,
+            'mergejils' => $mergejil,
+            'bolovsrols' => $bolovsrol,
+            'teachers' => $teachers,
             'user' => Auth::guard('bigg')->user()
         ]);
+
     }
 
     public function update(Request $request, $id)
@@ -122,10 +147,7 @@ class AngiController extends Controller
         $angi = Angi::findOrFail($id);
 
         $angi->ner = Str::ucfirst($request->ner);
-        $angi->course = $request->course;
-        $angi->buleg = Str::ucfirst($request->buleg);
-        $angi->m_id = $request->m_id;
-        $angi->b_id = $request->b_id;
+        $angi->tovch = Str::upper($request->tovch);
 
         $angi->save();
 
@@ -151,5 +173,12 @@ class AngiController extends Controller
 
         return redirect()->route('angi')->with('success', 'Анги устгагдлаа нэмэгдлээ!'); 
 
+    }
+
+    public function delete(Request $request)
+    {
+        $member = angi::findOrFail($request->get("t_id"));
+        $member->delete();
+        return redirect()->route('bigg-angi')->with('success', 'Анги амжилттай устгалаа!'); 
     }
 }

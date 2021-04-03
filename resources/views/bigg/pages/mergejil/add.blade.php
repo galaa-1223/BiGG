@@ -13,7 +13,7 @@
         <div class="intro-y col-span-12 lg:col-span-6">
             <form class="validate-form-teacher" action="{{ route('bigg-mergejil-save') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                <!-- BEGIN: Анги нэмэх -->
+                <!-- BEGIN: Мэргэжил нэмэх -->
                 <div class="intro-y box p-5">
                     <div class="input-form">
                         <label class="flex flex-col sm:flex-row">
@@ -61,9 +61,9 @@
                         <button type="submit" name="action" value="save" class="button w-40 bg-theme-1 text-white ml-5">{{ __('site.save') }}</button>
                     </div>
                 </div>
-                <!-- END: Анги нэмэх -->
-            </div>
-        </form>
+                <!-- END: Мэргэжил нэмэх -->
+            </form>
+        </div>
     </div> 
 @endsection
 

@@ -55,7 +55,7 @@
                             <div class="relative mt-2">
                                 <div class="absolute top-0 left-0 rounded-l px-4 h-full flex items-center justify-center bg-gray-100 dark:bg-dark-1 dark:border-dark-4 border text-gray-600">Цаг: </div>
                                 <div class="pl-6">
-                                    <input type="text" name="tsag" class="input pl-12 w-full border col-span-4" value="72" minlength="1" maxlength="4" required data-pristine-integer-message="Тоо оруулна уу" data-pristine-minlength-message="1 тэмдэгт байх ёстой" data-pristine-maxlength-message="1 тэмдэгт байх ёстой" data-pristine-required-message="Курс хоосон байж болохгүй">
+                                    <input type="text" name="tsag" class="form-control pl-12 w-full border col-span-4" value="72" minlength="1" maxlength="4" required data-pristine-integer-message="Тоо оруулна уу" data-pristine-minlength-message="1 тэмдэгт байх ёстой" data-pristine-maxlength-message="1 тэмдэгт байх ёстой" data-pristine-required-message="Курс хоосон байж болохгүй">
                                 </div>
                             </div>
                             <div class="relative mt-2">
@@ -63,16 +63,16 @@
                         </div>
                     </div>
                     <div class="flex justify-end mt-4">
-                        <button type="button" onclick="window.location.href='{{ route('bigg-teachers-fond') }}'" class="button w-40 bg-theme-6 text-white ml-5">{{ __('site.cancel') }}</button> 
-                        <button type="submit" name="action" value="save" class="button bg-theme-1 text-white ml-5">{{ __('site.save') }}</button>
+                        <button type="button" onclick="window.location.href='{{ route('bigg-teachers-fond') }}'" class="btn w-40 bg-theme-6 text-white ml-5">{{ __('site.cancel') }}</button> 
+                        <button type="submit" name="action" value="save" class="btn bg-theme-1 text-white ml-5">{{ __('site.save') }}</button>
                     </div>
                 </div>
                 <!-- END: Фонд нэмэх -->
             </form>
         </div>
         <!-- BEGIN: Data List -->
-        <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
-            @if(!$fonds)
+        <div class="intro-y col-span-10 overflow-auto lg:overflow-visible">
+            @if($fonds->isEmpty())
                 <div class="rounded-md flex items-center px-5 py-4 mb-2 mt-2 bg-theme-17 text-theme-11">
                     <i data-feather="alert-triangle" class="w-6 h-6 mr-2"></i> Мэдээлэл алга байна!
                 </div>
@@ -82,13 +82,16 @@
                     <tr>
                         <th class="whitespace-nowrap">#</th>
                         <th class="whitespace-nowrap">Ангийн нэр</th>
-                        <th class="text-center whitespace-nowrap">Оюутны тоо</th>
-                        <th class="text-center whitespace-nowrap">Төлөв</th>
+                        <th class="text-center whitespace-nowrap">Хичээл</th>
+                        <th class="text-center whitespace-nowrap">Цаг</th>
                         <th class="text-center whitespace-nowrap">Үйлдэл</th>
                     </tr>
                 </thead>
                 <tbody>
-                        <?php $i = 1;?>
+                        <?php 
+                            $i = 1;
+                            $tsag = 0;
+                        ?>
                         @foreach($fonds as $fond)
                         <tr class="intro-x">
                             <td class="w-40">
@@ -97,28 +100,34 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="" class="font-medium whitespace-nowrap">{{ $fond->ner }} {{ $fond->course }}{{ $fond->buleg }}</a>
-                                <div class="text-gray-600 text-xs whitespace-nowrap mt-0.5">{{ Str::substr($fond->ovog, 0, 1) }}. {{ $fond->bagsh }}</div>
+                                <a href="" class="font-medium whitespace-nowrap">{{ $fond->angi }} {{ $fond->course }}{{ $fond->buleg }}</a>
                             </td>
-                            <td class="text-center">0</td>
-                            <td class="w-40">
-                                <div class="flex items-center justify-center text-theme-9">
-                                    
-                                </div>
+                            <td class="text-center">{{ $fond->hicheel }}</td>
+                            <td class="text-center">{{ $fond->tsag }}</td>
                             </td>
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
                                     <a class="flex items-center mr-3" href="javascript:;">
                                         <i data-feather="check-square" class="w-4 h-4 mr-1"></i> {{ __('site.edit') }}
                                     </a>
-                                    <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal" data-id="{{ $fond->id }}">
+                                    <a class="flex items-center text-theme-6 delete_button" href="javascript:;" data-target="#delete-confirmation-modal" data-id="{{ $fond->fid }}">
                                         <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> {{ __('site.delete') }}
                                     </a>
                                 </div>
                             </td>
                         </tr>
-                        <?php $i++;?>
+                        <?php 
+                            $i++;
+                            $tsag += $fond->tsag;
+                        ?>
                         @endforeach
+                        <tr class="intro-x">
+                            <td class="w-40"></td>
+                            <td></td>
+                            <td></td>
+                            <td class="text-center text-pink-800 font-bold">{{ $tsag }}</td>
+                            <td></td>
+                        </tr>
                 </tbody>
             </table>
             @endif
@@ -128,15 +137,20 @@
     <!-- BEGIN: Delete Confirmation Modal -->
     <div class="modal" id="delete-confirmation-modal">
         <div class="modal__content">
-            <div class="p-5 text-center">
-                <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
-                <div class="text-3xl mt-5">Are you sure?</div>
-                <div class="text-gray-600 mt-2">Do you really want to delete these records? This process cannot be undone.</div>
-            </div>
-            <div class="px-5 pb-8 text-center">
-                <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">Cancel</button>
-                <button type="button" class="delete_button button w-24 bg-theme-6 text-white">Delete</button>
-            </div>
+            <form action="{{ route('bigg-teachers-fond-delete-ajax') }}" method="post">
+            @csrf
+                <input type="hidden" class="t_id" name="t_id" value="">
+                <input type="hidden" name="tid" value="{{ $t_id }}" />
+                <div class="p-5 text-center">
+                    <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+                    <div class="text-3xl mt-5">Сонгосон цагийн фонд устгахыг хүсэж байна уу?</div>
+                    <div class="text-gray-600 mt-2">Баазаас нэг мөсөн устгагдахыг анхаарна уу!</div>
+                </div>
+                <div class="px-5 pb-8 text-center">
+                    <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">{{ __('site.cancel') }}</button>
+                    <button type="submit" class="modal_delete_button button w-24 bg-theme-6 text-white">{{ __('site.delete') }}</button>
+                </div>
+            </form>
         </div>
     </div>
     <!-- END: Delete Confirmation Modal -->

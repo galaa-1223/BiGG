@@ -8,5 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Hicheel extends Model
 {
     use HasFactory;
+
     protected $table = 'hicheel';
+
+    protected $fillable = [
+        'ner',
+        'tovch'
+    ];
+
 }

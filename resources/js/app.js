@@ -1,5 +1,13 @@
-// 3rd Parties
+/*
+|--------------------------------------------------------------------------
+| 3rd Party Libraries
+|--------------------------------------------------------------------------
+|
+| Import 3rd party library JS files.
+|
+*/
 import "./bootstrap";
+import "./tw-starter";
 import "./chart";
 import "./highlight";
 import "./feather";
@@ -8,31 +16,32 @@ import "./tippy";
 import "./datepicker";
 import "./tail-select";
 import "./dropzone";
-// import "./inputmask";
 // import "./ckeditor";
 import "./validation";
 import "./zoom";
-import "./svg-loader";
-import "./toast";
+import "./notification";
 import "./tabulator";
+import "./calendar";
 
-// Components
+/*
+|--------------------------------------------------------------------------
+| Components
+|--------------------------------------------------------------------------
+|
+| Import JS components.
+|
+*/
 import "./maps";
 import "./chat";
-import "./dropdown";
-import "./modal";
 import "./show-modal";
+import "./show-slide-over";
 import "./show-dropdown";
-import "./tab";
-import "./accordion";
 import "./search";
 import "./copy-code";
 import "./show-code";
 import "./side-menu";
 import "./mobile-menu";
 import "./side-menu-tooltip";
+// import "./dark-mode-switcher";
 
 import "./scripts";
-
-// Dark mode switcher
-// import "./dark-mode-switcher";

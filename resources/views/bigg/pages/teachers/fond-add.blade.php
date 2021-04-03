@@ -46,21 +46,6 @@
                             </select>
                         </div>
                     </div>
-                    <div class="input-form mt-3">
-                        <label class="flex flex-col sm:flex-row">
-                            <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">.</span>
-                        </label>
-                        <div class="sm:grid grid-cols-3 gap-2">
-                            <div class="relative mt-2">
-                                <div class="absolute top-0 left-0 rounded-l px-4 h-full flex items-center justify-center bg-gray-100 dark:bg-dark-1 dark:border-dark-4 border text-gray-600">Цаг: </div>
-                                <div class="pl-6">
-                                    <input type="text" name="tsag" class="input pl-12 w-full border col-span-4" value="72" minlength="1" maxlength="4" required data-pristine-integer-message="Тоо оруулна уу" data-pristine-minlength-message="1 тэмдэгт байх ёстой" data-pristine-maxlength-message="1 тэмдэгт байх ёстой" data-pristine-required-message="Курс хоосон байж болохгүй">
-                                </div>
-                            </div>
-                            <div class="relative mt-2">
-                            </div>
-                        </div>
-                    </div>
                     <div class="flex justify-end mt-4">
                         <button type="button" onclick="window.location.href='{{ route('bigg-angi') }}'" class="button bg-theme-6 text-white ml-5">{{ __('site.cancel') }}</button> 
                         <button type="submit" name="action" value="save_and_new" class="button bg-theme-1 text-white ml-5">{{ __('site.save_and_new') }}</button> 
